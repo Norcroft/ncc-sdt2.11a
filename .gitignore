@@ -1,0 +1,13 @@
+build
+localtests
+.DS_Store
+
+/*.c
+/*.s
+/*.o
+
+# Xcode
+DerivedData
+xcshareddata
+xcuserdata
+project.xcworkspace
