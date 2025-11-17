@@ -193,7 +193,7 @@ extern char *target_asm_options(ToolEnv *);
 
 #define localcg_newliteralpool_exists 1
 
-extern bool ImmediateOperand(int32 n, uint32 op);
+extern bool ImmediateOperand(int32 n, UPtr op);
 
 #define immed_cmp(n) ImmediateOperand(n, J_CMPK)
 #define immed_op(n, op) ImmediateOperand(n, op)

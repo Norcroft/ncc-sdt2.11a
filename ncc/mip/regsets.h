@@ -24,8 +24,8 @@
 /* The following line is a place holder: use discard2 not rldiscard.    */
 #define rldiscard(l) discard2(l)        /* place holder only            */
 
-typedef void RProc2(int32, VoidStar);
-typedef void RProc1(int32);
+typedef void RProc2(IPtr, VoidStar);
+typedef void RProc1(IPtr);
 
 /*
  * vregsets - a space efficient representation for sets of integers which are

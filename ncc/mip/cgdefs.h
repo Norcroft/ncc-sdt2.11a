@@ -37,7 +37,7 @@ struct LabelNumber {            /* compiler-generated-label descriptor */
       List *frefs;              /* forwd ref list, managed by local cg */
       int32 defn;               /* jopcode location or code location   */
   } u;
-  int32 name;                   /* 'name' (internal label number) -  */
+  IPtr name;                    /* 'name' (internal label number) -  */
 };                              /* top bit indicates 'label defined' */
 /*
  * Useful access and constructor functions...
@@ -214,7 +214,7 @@ struct BlockList
 
 /* The following is used when a real machine register is required.       */
 
-typedef int32 RealRegister;
+typedef IPtr RealRegister;
 
 #define RegSort int32    /* the following 3 values ... */
 
@@ -301,7 +301,7 @@ struct Icode
  * rather than the unchecked arithmetic coding currently used?  This is not
  * the highest priority clean-up for me to worry about
  */
-  uint32 op, flags;
+  UPtr op, flags;
   VRegInt r1, r2, r3, r4;
 };
 

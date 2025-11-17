@@ -210,13 +210,13 @@ FloatCon *real_to_real(FloatCon *fc, SET_BITMAP m)
 #endif
 
 FloatCon *int_to_real(int32 n, int32 u, SET_BITMAP m)
-{   char s[20];
+{   char s[23]; // now enough for uint64_t(-1), which the old casts allowed.
     /* there must be better ways - e.g. fltrep_itod in fltrep.c ??       */
     /* The use of sprintf/real_of_string ensures that the floatcon that  */
     /* is generated has a sensible string attached to it so leave this   */
     /* code alone - it works quite well enough.                          */
-    if (u) _sprintf(s, "%lu.0", (long)n);
-    else _sprintf(s, "%ld.0", (long)n);
+    if (u) _sprintf(s, "%u.0", (uint32)n);
+    else _sprintf(s, "%d.0", (int32)n);
     return real_of_string(s,m);
 }
 

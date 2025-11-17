@@ -36,7 +36,7 @@ static PendingOp *pendingstack;
 static PendingOp *pending;
 
 typedef union {
-  int32 i;
+  IPtr i;
   unsigned32 u;
   PendingOp *p;
 } IntOrP;
@@ -645,7 +645,7 @@ static bool p_shift_d(IntOrP *resp, IntOrP r1) {
   return YES;
 }
 
-static int32 opfield(PendingOp *op, P_Field field, int32 *dead) {
+static IPtr opfield(PendingOp *op, P_Field field, int32 *dead) {
   switch (field) {
   case pf_op:   return op->ic.op;
   case pf_peep: return op->peep;
@@ -664,7 +664,7 @@ static int32 opfield(PendingOp *op, P_Field field, int32 *dead) {
   }
 }
 
-static void setopfield(PendingOp *op, P_Field field, int32 val, int32 dead) {
+static void setopfield(PendingOp *op, P_Field field, IPtr val, int32 dead) {
   switch (field) {
   case pf_op:   op->ic.op = val; break;
   case pf_peep: op->peep = val; break;

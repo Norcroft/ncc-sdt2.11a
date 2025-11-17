@@ -983,7 +983,7 @@
 /*************************************/
 
 
-typedef uint32 J_OPCODE; /* really ENUMERATED_OPCODE but ensure 32 bits */
+typedef UPtr J_OPCODE; /* really ENUMERATED_OPCODE but ensure 32 bits */
 
 /* n.b Q_UBIT is the same as J_UNSIGNED */
 #define Q_MASK     (~(int32)0x07ffffff)

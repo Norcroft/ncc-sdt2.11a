@@ -175,7 +175,7 @@ static Mark *freemarks;
 
 typedef struct FreeList {
     struct FreeList *next;
-    int32 rest[1];
+    ssize_t rest[1];
 } FreeList;
 
 typedef struct OverlargeBlockHeader OverlargeBlockHeader;

@@ -846,7 +846,7 @@ static SR_Binder *AddDef(Binder *b, BlockHead *block, int32 ic) {
   return sr;
 }
 
-static void Scan_MakeGenSet(int32 n, void *arg) {
+static void Scan_MakeGenSet(IPtr n, void *arg) {
   BlockHead *b = (BlockHead *)arg;
   SR_Binder *sr = sr_binder_(n);
   sr_gen_(b) = vregset_insert(sr->defs->index, sr_gen_(b), NULL, &allocrec);
@@ -926,7 +926,7 @@ static void ScanBlock(BlockHead *block) {
   vregset_discard(gen);
 }
 
-static void SR_MakeKilledSet(int32 n, void *arg) {
+static void SR_MakeKilledSet(IPtr n, void *arg) {
   BlockHead *b = (BlockHead *)arg;
   SR_Binder *sr = sr_binder_(n);
   sr_kill_(b) = vregset_union(sr_kill_(b), sr->defset, &allocrec);

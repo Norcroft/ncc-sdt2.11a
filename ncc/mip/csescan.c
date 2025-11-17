@@ -731,7 +731,7 @@ static AliasType possiblealias(Location const *loc, Location const *loc1)
     }
 }
 
-static void updateusers_cb(int32 n, void *arg) {
+static void updateusers_cb(IPtr n, void *arg) {
     int32 id = *(int32 *)arg;
     Location *loc = loc_(n);
     int32 i;
@@ -760,7 +760,7 @@ static void updateusers(int32 id, Exprn *p)
     if (p != NULL) cseset_map(exleaves_(p), updateusers_cb, &id);
 }
 
-static void maybealias_cb(int32 n, void *arg) {
+static void maybealias_cb(IPtr n, void *arg) {
     if (ispublic(loc_(n))) *(bool *)arg = YES;
 }
 
@@ -804,7 +804,7 @@ typedef struct {
     bool killed;
 } ULWRec;
 
-static void ulw_cb(int32 id, void *arg)
+static void ulw_cb(IPtr id, void *arg)
 {
     ULWRec *ulw = (ULWRec *) arg;
     if (isrealloc(id) && !ulw->killed) {
@@ -2930,7 +2930,7 @@ static void RewriteNext(BlockHead *b, LabelNumber *oldlab, LabelNumber *newlab,
   }
 }
 
-static void ELV_cb(int32 n, void *arg) {
+static void ELV_cb(IPtr n, void *arg) {
   RegValue **pp = (RegValue **)arg;
   RegValue *rv = RegValueForReg(n);
   if (rv != NULL) {
@@ -5034,7 +5034,7 @@ static void pruneandrenumberexprns(BlockHead *top)
 }
 #endif
 
-static void addkilledexprns(int32 locno, VoidStar arg)
+static void addkilledexprns(IPtr locno, VoidStar arg)
 {
     Location *loc = loc_(locno);
     VRegSetP *s = (VRegSetP *) arg;

@@ -86,7 +86,7 @@ typedef IPtr       AEop;        /* An AEop is implemented as an integer */
  * Sometime the type VRegnum should be made into a union or some such that
  * can not accidentally be punned with an int32.
  */
-typedef int32 VRegnum;          /* a pity this has to be here, but... */
+typedef IPtr VRegnum;          /* a pity this has to be here, but... */
 
 #ifndef NON_CODEMIST_MIDDLE_END
 /*

@@ -22,7 +22,7 @@
 typedef struct SymInfo {
     AEop sym;
     union { char *s; int32 i; Symstr *sv; FloatCon *fc; Int64Con *i64; } a1;
-    union { int32 len, flag; } a2;
+    union { IPtr len, flag; } a2;
     FileLine fl;
 } SymInfo;
 

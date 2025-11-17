@@ -131,7 +131,7 @@ static bool BlockList_Member(BlockHead *b, BlockList *list) {
 
 #define printset(s) cseset_map(s, ps, NULL)
 
-static void ps(int32 n, VoidStar arg)
+static void ps(IPtr n, VoidStar arg)
 {
     IGNORE(arg);
     cc_msg(" %ld", (long)n);
@@ -487,7 +487,7 @@ static bool ContainsLoadr(Exprn *p)
     }
 }
 
-static void AddCSE(int32 n, void *arg)
+static void AddCSE(IPtr n, void *arg)
 {
     Exprn *ex = exprn_(n);
     if ( !ContainsLoadr(ex) && WorthReplacement(ex))
@@ -1309,7 +1309,7 @@ static bool SafeToLift(Exprn *ex)
     }
 }
 
-static void AddIfSafe(int32 n, void *arg)
+static void AddIfSafe(IPtr n, void *arg)
 {
     if (SafeToLift(exprn_(n))) AddCSE(n, arg);
 }

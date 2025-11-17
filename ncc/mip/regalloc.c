@@ -588,7 +588,7 @@ static void add_clash(VRegnum a, VRegnum b)
     }
 }
 
-static void clashkillbits_cb(int32 k, VoidStar arg)
+static void clashkillbits_cb(IPtr k, VoidStar arg)
 {   /* clashkillbits_cb is passed as parameter and so needs silly type. */
     RealRegSet *m = (RealRegSet *) arg;
     RealRegister r = register_number((VRegnum)k);
@@ -615,7 +615,7 @@ static VRegSetAllocRec clashvallocrec;
  *    &curstats.regsetbytes };
  */
 
-static void removeclashes_rcb(int32 vr, VoidStar arg)
+static void removeclashes_rcb(IPtr vr, VoidStar arg)
 {
     VRegSetP *residual = (VRegSetP *) arg;
     VRegister *clashee = vreg_(vr);
@@ -894,7 +894,7 @@ static void makebindersclash(VRegnum r, BindList *bl, VRegnum rx)
     }
 }
 
-static void setregister_cb(int32 r, VoidStar r1)
+static void setregister_cb(IPtr r, VoidStar r1)
 {   /* the type of 'r1' is a lie for map-function vregset_map.          */
     add_clash((VRegnum)r, (VRegnum)(IPtr)r1);
 }
@@ -970,14 +970,14 @@ typedef struct {
     RegList *rlist;
 } SRCRecord;
 
-static void setregistercopy_cb(int32 ar, VoidStar arg)
+static void setregistercopy_cb(IPtr ar, VoidStar arg)
 {
     SRCRecord *p = (SRCRecord *)arg;
     VRegnum r = (VRegnum)ar;
     if (r != p->rsource && r != p->r) add_clash(p->r, r);
 }
 
-static void setregistercopy_cb2(int32 ar, VoidStar arg)
+static void setregistercopy_cb2(IPtr ar, VoidStar arg)
 {
     SRCRecord *p = (SRCRecord *)arg;
     VRegnum r = (VRegnum)ar;
@@ -1016,7 +1016,7 @@ static VRegSetP set_register_copy(VRegnum r, VRegSetP s, VRegnum rsource)
     return s;
 }
 
-static void setregisterslave_cb(int32 r, VoidStar r1)
+static void setregisterslave_cb(IPtr r, VoidStar r1)
 {   /* the type of 'r1' is a lie for map-function vregset_map.          */
     if (!reg_overlord((VRegnum)(IPtr)r1, (VRegnum)r))
         add_clash((VRegnum)r, (VRegnum)(IPtr)r1);
@@ -1075,7 +1075,7 @@ static uint32 max_value_number;
 struct ValnRegList {
   ValnRegList *cdr;
   VRegnum rno;
-  uint32 wc;
+  size_t wc;
 };
 #define rno_(rl) ((rl)->rno)
 #define wc_(rl) ((rl)->wc)
@@ -1290,7 +1290,7 @@ static void instruction_copy_info(const Icode *ic)
 
 
 static VRegSetP instruction_ref_info(VRegSetP s1, Icode const *const ic,
-                                     uint32 *exact, int demand)
+                                     UPtr *exact, int demand)
 {
     const int32 op = ic->op & J_TABLE_BITS;
     int32 dataflow = 0;
@@ -1423,7 +1423,7 @@ static void def_f(RealRegister r, RealRegSet_MapArg * a)
 }
 
 
-static VRegSetP add_instruction_info(VRegSetP s1, Icode *ic, uint32 *deadp, bool removed)
+static VRegSetP add_instruction_info(VRegSetP s1, Icode *ic, UPtr *deadp, bool removed)
 {
     bool live_r1, live_r2, live_psr = NO;
     J_OPCODE op = ic->op & J_TABLE_BITS;
