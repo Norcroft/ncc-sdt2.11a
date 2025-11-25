@@ -568,7 +568,7 @@ bool Inline_Save(Binder *b, BindList *local_binders, BindList *regvar_binders) {
   if (debugging(DEBUG_CG)) {
     cc_msg("Inline_Save %s", symname_(p->fn.fndetails.symstr));
     if (p->sort == IS_Dtor) {
-      cc_msg(": Dtor: %ld\n", (int32)blklab_(p->a.dtor));
+      cc_msg(": Dtor: %x\n", blklab_(p->a.dtor));
     } else if (p->sort == IS_Ctor) {
       int32 i;
       BlockMap *map = p->a.ctor;

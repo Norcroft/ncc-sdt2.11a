@@ -537,7 +537,7 @@ static void cg_bl(const AsmInstr *const a)
 {   /* Branches are already handled */
     if (OPCODE(asmopcode_(a)) == A_BL)
     {
-        emitreg4(J_BL, 0, (int) asmopnd1_(a), intval_(asmopnd2_(a)),
+        emitreg4(J_BL, 0, (IPtr) asmopnd1_(a), intval_(asmopnd2_(a)),
                  intval_(asmopnd3_(a)), intval_(asmopnd4_(a)));
     }
 }

@@ -2892,12 +2892,13 @@ static void output_thisfn_handler_entries(List* h_entries, int lastone)
   /*recurse, filling up stack; would be better to reverse list explicitly*/
   {
     List* tl=(List*) cdr_(h_entries);
-    int destru, handler, offset, range_len, ensp_offset;
+    int destru, offset, range_len, ensp_offset;
+    IPtr handler;
     destru=car_(tl); tl=cdr_(tl);
     handler=car_(tl); tl=cdr_(tl);
     offset=car_(tl); tl=cdr_(tl);
     range_len=car_(tl);
-    ensp_offset=(int) cdr_(tl); /*dotted-list*/
+    ensp_offset=(IPtr) cdr_(tl); /*dotted-list*/
 
     if (lastone) offset|= 0x80000000; /* high bit set to mark the end */
 
@@ -2921,7 +2922,7 @@ static void output_thisfn_handler_entries(List* h_entries, int lastone)
   }
 }
 
-static void add_handler_entry(int destru, int handler, int prev_codep,
+static void add_handler_entry(int destru, IPtr handler, int prev_codep,
                               int range_len, int ensp_offset)
 {
   if (range_len!=0)
@@ -2934,7 +2935,8 @@ static void add_handler_entry(int destru, int handler, int prev_codep,
 
 static void output_exenv(ExceptionEnv *e)
 {
-  int ensp_offset, handler, range_len = (int) codep - prev_codep;
+  int ensp_offset, range_len = (int) codep - prev_codep;
+  IPtr handler;
   if (e==NULL) return;
   if (e->type==ex_destructor)
     {
@@ -2954,8 +2956,8 @@ static void output_exenv(ExceptionEnv *e)
       int i;
       for(i=0;i<blktabsize_(lab_block_(l));i++) /* multiple handler cases: iterate over hl */
         {
-          if (debugging(DEBUG_CG)) printf("i=%d hl=%x\n", i, (int)hl);
-          handler = (int) table[i];
+          if (debugging(DEBUG_CG)) printf("i=%d hl=%p\n", i, hl);
+          handler = (IPtr)table[i];
           ensp_offset=hl->type; /*this is exception number, or 0 for "..." */
           hl=hl->cdr;
           add_handler_entry(0, handler, prev_codep, range_len, ensp_offset);

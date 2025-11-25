@@ -572,7 +572,7 @@ VoidStar discard3(VoidStar p)
     FreeList *pp = (FreeList *) p;
     VoidStar q = (VoidStar) pp->next;
     int i;                   /* 0..segmax */
-    int32 *ppp = pp->rest;
+    ssize_t *ppp = pp->rest;
     ppp[0] ^= 0x99990000;   /* to help with debugging */
     ppp[1] ^= 0x99990000;   /* to help with debugging */
     for (i = synsegcnt; i > 0;)
